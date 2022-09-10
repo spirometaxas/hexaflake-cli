@@ -27,7 +27,7 @@ then:
 ```
 const hexaflake = require('hexaflake-cli');
 console.log(hexaflake.create(<n>, <size>));
-console.log(hexaflake.create(<n>, { size: <size>, character: <character> }));
+console.log(hexaflake.create(<n>, { size: <number>, character: <character> }));
 ```
 The config params are optional.
 

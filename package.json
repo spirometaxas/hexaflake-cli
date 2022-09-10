@@ -1,6 +1,6 @@
 {
   "name": "hexaflake-cli",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Print the Hexaflake fractal to the console!",
   "main": "./src/index.js",
   "bin": {

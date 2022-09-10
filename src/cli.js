@@ -1,8 +1,17 @@
 #!/usr/bin/env node
 const hexaflake = require('./index.js');
 
-const printUsage = function() {
-    console.log('\nUsage:\n' + '  $ hexaflake-cli <n>\n' + '  $ hexaflake-cli <n> <size>\n' + '\nFlags:\n --character=<character>: Draw using 1 specific character');
+const printUsage = function(showIntro) {
+    if (showIntro) {
+        console.log('\n Print the Hexaflake Fractal to the console!');
+    }
+    console.log('\n' + 
+                ' Usage:\n' + 
+                '   $ hexaflake-cli <n>\n' + 
+                '   $ hexaflake-cli <n> <size>\n' + 
+                '\n' + 
+                ' Options:\n' + 
+                '   --character=<character>  Draw using 1 specific character\n');
 }
 
 const getFlags = function(params) {
@@ -37,10 +46,10 @@ const getCharacter = function(flags) {
                 if (character.length === 1) {
                     return character;
                 } else {
-                    console.log('\nWarning: Please provide just 1 character.  Example: --character=*');
+                    console.log('\n Warning: Please provide just 1 character.  Example: --character=*');
                 }
             } else {
-                console.log('\nWarning: Please provide 1 character.  Example: --character=*');
+                console.log('\n Warning: Please provide 1 character.  Example: --character=*');
             }
         }
     }
@@ -58,19 +67,19 @@ if (process.argv.length > 2) {
             if (!isNaN(values[1]) && parseInt(values[1]) >= n) {
                 s = parseInt(values[1]);
             } else {
-                console.log('\n<size> should be a number greater than or equal to <n>');
-                printUsage();
+                console.log('\n <size> should be a number greater than or equal to <n>');
+                printUsage(false);
             }
         } else {
             s = n;
         }
         if (n !== undefined && s !== undefined) {
-            console.log(hexaflake.create(n, { scale: s, character: getCharacter(flags) }));
+            console.log(hexaflake.create(n, { size: s, character: getCharacter(flags) }));
         }
     } else {
-        console.log('\n<n> should be a number greater than or equal to 0');
-        printUsage();
+        console.log('\n <n> should be a number greater than or equal to 0');
+        printUsage(false);
     }
 } else {
-    printUsage();
+    printUsage(true);
 }

@@ -24,9 +24,9 @@ const createBoard = function(w, h) {
   return board;
 }
 
-const drawHexagon = function(board, pos, scale, character) {
-  const width = getWidth(scale);
-  for (let i = 0; i < getHeight(scale) / 2; i++) {
+const drawHexagon = function(board, pos, size, character) {
+  const width = getWidth(size);
+  for (let i = 0; i < getHeight(size) / 2; i++) {
     const startX = pos.x - parseInt(width / 2) + i;
     for (let j = 0; j < width - (2 * i); j++) {
       if (character) {
@@ -40,7 +40,7 @@ const drawHexagon = function(board, pos, scale, character) {
       }
     }
   }
-  for (let i = 0; i < getHeight(scale) / 2; i++) {
+  for (let i = 0; i < getHeight(size) / 2; i++) {
     const startX = pos.x - parseInt(width / 2) + i;
     for (let j = 0; j < width - (2 * i); j++) {
       if (character) {
@@ -56,26 +56,26 @@ const drawHexagon = function(board, pos, scale, character) {
   }
 }
 
-const hexaflake = function(n, scale, board, pos, character) {
+const hexaflake = function(n, size, board, pos, character) {
   if (n === 0) {
-    drawHexagon(board, pos, scale, character);
+    drawHexagon(board, pos, size, character);
     return;
   }
 
   // Center
-  hexaflake(n - 1, scale - 1, board, { x: pos.x, y: pos.y }, character);
+  hexaflake(n - 1, size - 1, board, { x: pos.x, y: pos.y }, character);
 
   // Sides
-  hexaflake(n - 1, scale - 1, board, { x: pos.x - getWidth(scale - 1) - 1, y: pos.y }, character);
-  hexaflake(n - 1, scale - 1, board, { x: pos.x + getWidth(scale - 1) + 1, y: pos.y }, character);
+  hexaflake(n - 1, size - 1, board, { x: pos.x - getWidth(size - 1) - 1, y: pos.y }, character);
+  hexaflake(n - 1, size - 1, board, { x: pos.x + getWidth(size - 1) + 1, y: pos.y }, character);
 
   // Top
-  hexaflake(n - 1, scale - 1, board, { x: pos.x - parseInt(getWidth(scale - 1) / 2) - 1, y: pos.y + getHeight(scale - 1) }, character);
-  hexaflake(n - 1, scale - 1, board, { x: pos.x + parseInt(getWidth(scale - 1) / 2) + 1, y: pos.y + getHeight(scale - 1) }, character);
+  hexaflake(n - 1, size - 1, board, { x: pos.x - parseInt(getWidth(size - 1) / 2) - 1, y: pos.y + getHeight(size - 1) }, character);
+  hexaflake(n - 1, size - 1, board, { x: pos.x + parseInt(getWidth(size - 1) / 2) + 1, y: pos.y + getHeight(size - 1) }, character);
 
   // Bottom
-  hexaflake(n - 1, scale - 1, board, { x: pos.x - parseInt(getWidth(scale - 1) / 2) - 1, y: pos.y - getHeight(scale - 1) }, character);
-  hexaflake(n - 1, scale - 1, board, { x: pos.x + parseInt(getWidth(scale - 1) / 2) + 1, y: pos.y - getHeight(scale - 1) }, character);
+  hexaflake(n - 1, size - 1, board, { x: pos.x - parseInt(getWidth(size - 1) / 2) - 1, y: pos.y - getHeight(size - 1) }, character);
+  hexaflake(n - 1, size - 1, board, { x: pos.x + parseInt(getWidth(size - 1) / 2) + 1, y: pos.y - getHeight(size - 1) }, character);
 }
 
 const draw = function(board) {
@@ -94,15 +94,15 @@ const create = function(n, config) {
     return '';
   }
   
-  let scale = n;
-  if (config && config.scale && config.scale > n) {
-    scale = config.scale;
+  let size = n;
+  if (config && config.size && config.size > n) {
+    size = config.size;
   }
 
   const character = config !== undefined && config.character !== undefined && config.character.length === 1 ? config.character : undefined;
 
-  const board = createBoard(getWidth(scale), getHeight(scale));
-  hexaflake(n, scale, board, { x: parseInt(getWidth(scale) / 2.0), y: parseInt(getHeight(scale) / 2.0) }, character); 
+  const board = createBoard(getWidth(size), getHeight(size));
+  hexaflake(n, size, board, { x: parseInt(getWidth(size) / 2.0), y: parseInt(getHeight(size) / 2.0) }, character); 
   return draw(board);
 }
 
