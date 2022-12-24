@@ -3,13 +3,17 @@ const hexaflake = require('./index.js');
 
 const printUsage = function(showIntro) {
     if (showIntro) {
-        console.log('\n Print the Hexaflake Fractal to the console!');
+        console.log(hexaflake.create(2));
+        console.log(' Print the Hexaflake Fractal to the console!');
     }
     console.log('\n' + 
                 ' Usage:\n' + 
                 '   $ hexaflake-cli <n>\n' + 
                 '   $ hexaflake-cli <n> <size>\n' + 
                 '\n' + 
+                '   <n> is the recursive step, a number greater than or equal to 1\n' + 
+                '   <size> is the size to draw, a number greater than or equal to <n>\n' + 
+                '\n' +
                 ' Options:\n' + 
                 '   --character=<character>  Draw using 1 specific character\n');
 }
