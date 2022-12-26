@@ -11,7 +11,7 @@ const printUsage = function(showIntro) {
                 '   $ hexaflake-cli <n>\n' + 
                 '   $ hexaflake-cli <n> <size>\n' + 
                 '\n' + 
-                '   <n> is the recursive step, a number greater than or equal to 1\n' + 
+                '   <n> is the recursive step, a number greater than or equal to 0\n' + 
                 '   <size> is the size to draw, a number greater than or equal to <n>\n' + 
                 '\n' +
                 ' Options:\n' + 
